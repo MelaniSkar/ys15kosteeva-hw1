@@ -113,21 +113,21 @@ public class TemperatureSeriesAnalysis {
         }
         return -res;
     }
-    public double[] findTempsLessThen(double tempValue) {
+    public double[] findTempsLessThen(double temp) {
         if (length == 0) {
             throw new IllegalArgumentException();
         }
         int count = 0;
         for (int i = 0; i < length; i++) {
-            if (temperatureList[i] < tempValue) {
+            if (temperatureSeries[i] < temp) {
                 count++;
             }
         }
         double[] result = new double[count];
         int k = 0;
         for (int i = 0; i < length; i++) {
-            if (temperatureList[i] < tempValue) {
-                result[k] = temperatureList[i];
+            if (temperatureSeries[i] < temp) {
+                result[k] = temperatureSeries[i];
                 k++;
             }
         }
