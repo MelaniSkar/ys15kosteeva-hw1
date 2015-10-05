@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="22" failures="0" name="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" time="0.013" errors="0" skipped="0">
+<testsuite tests="23" failures="0" name="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" time="0.017" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_60\jre\bin"/>
@@ -63,14 +63,15 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="pentium_pro+mmx pentium_pro pentium+mmx pentium i486 i386 i86"/>
   </properties>
-  <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testMinFailOnEmptyList" time="0.011"/>
+  <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testSummaryStatisticsTestValues" time="0.015"/>
+  <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testMinFailOnEmptyList" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testDeviationFailOnEmptyList" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testFindTempsLessThenFailOnEmptyList" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testFindTempClosestToZeroFailOnEmptyList" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testFindTempsGreaterThenFailOnEmptyList" time="0"/>
-  <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testFindTempsLessThen" time="0.001"/>
+  <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testFindTempsLessThen" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testMax" time="0"/>
-  <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="TemperatureSeriesAnalysisCheckResultLength" time="0"/>
+  <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="TemperatureSeriesAnalysisCheckResultLength" time="0.001"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testAverage" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="TemperatureSeriesAnalysisWithEmptyList" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testMaxFailOnEmptyList" time="0"/>
@@ -78,9 +79,9 @@
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testAverageFailOnEmptyList" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testDeviation" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testAddTempsToEmptyList" time="0"/>
-  <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="TestSummaryStatistics" time="0"/>
+  <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="TestSummaryStatistics" time="0.001"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testFindTempClosestToValueFailOnEmptyList" time="0"/>
-  <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testFindTempsGreaterThen" time="0.001"/>
+  <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testFindTempsGreaterThen" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testAddTempsWithEmptyListToAdd" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="TestSummaryStatisticsFailOnEmptyList" time="0"/>
   <testcase classname="ua.yandex.shad.tempseries.TemperatureSeriesAnalysisTest" name="testFindTempClosestToZero" time="0"/>

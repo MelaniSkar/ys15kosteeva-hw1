@@ -43,7 +43,7 @@ public class TemperatureSeriesAnalysisTest {
         double[] temperatureSeries = {0.0, -0.1, -0.0, 0.1};
         TemperatureSeriesAnalysis seriesAnalysis 
         = new TemperatureSeriesAnalysis(temperatureSeries);
-        double expResult = Math.sqrt(0.02)/4;
+        double expResult = Math.sqrt(0.02 / 4);
         double actualResult = seriesAnalysis.deviation();
         assertEquals(expResult, actualResult, 0.00001);
     }
@@ -177,5 +177,21 @@ public class TemperatureSeriesAnalysisTest {
         seriesAnalysis.addTemps();
         double[] actualResult = seriesAnalysis.getValues();
         assertArrayEquals(expResult, actualResult, 0.00001);
+    }
+    @Test
+    public void testSummaryStatisticsTestValues() {
+    	double[] temperatureSeries = {1.0, -85.0, -1.0, 2.0, 7};
+    	TemperatureSeriesAnalysis seriesAnalysis = 
+    			new TemperatureSeriesAnalysis(temperatureSeries);
+    	TempSummaryStatistics statistics = seriesAnalysis.summaryStatistics();
+    	double expDev = 34.99942;
+    	double[] expResult = {-15.2, expDev, -85.0, 7.0};
+    	double actualAvg = statistics.getAvgTemp();
+    	double actualDev = statistics.getDevTemp();
+    	double actualMin = statistics.getMinTemp();
+    	double actualMax = statistics.getMaxTemp();
+    	double[] actualResult = {actualAvg, actualDev, actualMin, actualMax};
+    	assertArrayEquals(expResult, actualResult, 0.0001);
+    	
     }
 }

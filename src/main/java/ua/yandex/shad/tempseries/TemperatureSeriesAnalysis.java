@@ -2,19 +2,18 @@ package ua.yandex.shad.tempseries;
 import java.util.InputMismatchException;
 public class TemperatureSeriesAnalysis { 
   
+    public static final int MIN_TEMPERATURE = -273;
+    public static final double EPSILON = 0.00001;
     private double[] temperatureSeries;
     private int length;
-    public static final int MIN_TEMPERATURE = - 273;
-    public static final double EPSILON = 0.00001;
-    
-    
+
     public TemperatureSeriesAnalysis() { 
         this.temperatureSeries = new double[0];
         this.length = 0;
     }
     public TemperatureSeriesAnalysis(double[] temperatureSeries) { 
         double[] copyTemperatureSeries = new double[temperatureSeries.length];
-        for(int i = 0; i < temperatureSeries.length; i++) {
+        for (int i = 0; i < temperatureSeries.length; i++) {
             copyTemperatureSeries[i] = temperatureSeries[i];
         }
         this.temperatureSeries = copyTemperatureSeries;
@@ -51,19 +50,20 @@ public class TemperatureSeriesAnalysis {
         for (int i = 0; i < length; i++) {
             res += (temperatureSeries[i] - avg) * (temperatureSeries[i] - avg);
         }
-        res = Math.sqrt(res);
-        res /= this.length;
+        res = Math.sqrt(res / this.length);
         return res;
     }
     public double min() {
         if (length == 0) {
             throw new IllegalArgumentException();
         }
-        double res = temperatureSeries[0];
+        double result = temperatureSeries[0];
         for (int i = 0; i < length; i++) {
-            if (temperatureSeries[i] < res) res = temperatureSeries[i];
+            if (temperatureSeries[i] < result) {
+                result = temperatureSeries[i];
+            }
         }
-        return res;
+        return result;
     }
     public double max() {
         if (length == 0) {
@@ -81,18 +81,18 @@ public class TemperatureSeriesAnalysis {
         if (length == 0) {
             throw new IllegalArgumentException();
         }
-        double res = Math.abs(temperatureSeries[0]);
+        double result = Math.abs(temperatureSeries[0]);
         for (int i = 0; i < length; i++) {
-            if (Math.abs(temperatureSeries[i]) < res) {
-                res = Math.abs(temperatureSeries[i]);
+            if (Math.abs(temperatureSeries[i]) < result) {
+                result = Math.abs(temperatureSeries[i]);
             }
         }
         for (int i = 0; i < length; i++) {
-            if (Math.abs(temperatureSeries[i] - res) < EPSILON) {
+            if (Math.abs(temperatureSeries[i] - result) < EPSILON) {
                 return temperatureSeries[i];
             }
         }
-        return -res;
+        return -result;
     }
     public double findTempClosestToValue(double tempValue) {
         if (length == 0) {
@@ -119,19 +119,19 @@ public class TemperatureSeriesAnalysis {
         }
         int count = 0;
         for (int i = 0; i < length; i++) {
-            if (temperatureSeries[i] < tempValue) {
+            if (temperatureList[i] < tempValue) {
                 count++;
             }
         }
-        double[] res = new double[count];
+        double[] result = new double[count];
         int k = 0;
         for (int i = 0; i < length; i++) {
-            if (temperatureSeries[i] < tempValue) {
-                res[i] = temperatureSeries[i];
+            if (temperatureList[i] < tempValue) {
+                result[k] = temperatureList[i];
                 k++;
             }
         }
-            return res;
+            return result;
     }
     public double[] findTempsGreaterThen(double tempValue) {
         if (length == 0) {
@@ -147,7 +147,7 @@ public class TemperatureSeriesAnalysis {
         int k = 0;
         for (int i = 0; i < length; i++) {
             if (temperatureSeries[i] > tempValue) {
-                res[i] = temperatureSeries[i];
+                res[k] = temperatureSeries[i];
                 k++;
             }
         }
@@ -176,7 +176,7 @@ public class TemperatureSeriesAnalysis {
         }
         
         while (lengthAfterAdd < length + tempsLength) {
-            lengthAfterAdd*=2;
+            lengthAfterAdd *= 2;
         }
         int numberOfElements = length + tempsLength;
         double[] resultMas = new double[lengthAfterAdd];
