@@ -1,4 +1,5 @@
 package ua.yandex.shad.tempseries;
+import java.util.InputMismatchException;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -84,11 +85,20 @@ public class TemperatureSeriesAnalysisTest {
         double actualResult = seriesAnalysis.max();
     }
     @Test
-    public void testFindTempClosestToZero() {
+    public void testFindTempClosestToZeroEqualModul() {
         double[] temperatureSeries = {-5.0, -270, 5.0, 10.0};
         TemperatureSeriesAnalysis seriesAnalysis 
         = new TemperatureSeriesAnalysis(temperatureSeries);
         double expResult = 5.0;
+        double actualResult = seriesAnalysis.findTempClosestToZero();
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+    @Test
+    public void testFindTempClosestToZero() {
+        double[] temperatureSeries = {-5.0, -270, 6.0, 10.0};
+        TemperatureSeriesAnalysis seriesAnalysis 
+        = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = -5.0;
         double actualResult = seriesAnalysis.findTempClosestToZero();
         assertEquals(expResult, actualResult, 0.00001);
     }
@@ -99,12 +109,21 @@ public class TemperatureSeriesAnalysisTest {
         double actualResult = seriesAnalysis.findTempClosestToZero();
     }
     @Test
-    public void testFindTempClosestToValue() {
-        double[] temperatureSeries = {-5.0, -270, 5.0, 10.0};
+    public void testFindTempClosestToValueEqualModul() {
+        double[] temperatureSeries = {-270, 5.0, 10.0, -5.0};
         TemperatureSeriesAnalysis seriesAnalysis 
         = new TemperatureSeriesAnalysis(temperatureSeries);
         double expResult = 5.0;
         double actualResult = seriesAnalysis.findTempClosestToValue(0);
+        assertEquals(expResult, actualResult, 0.00001);
+    }
+    @Test
+    public void testFindTempClosestToValue() {
+        double[] temperatureSeries = {-5.0, -270, 6.0, 10.0};
+        TemperatureSeriesAnalysis seriesAnalysis 
+        = new TemperatureSeriesAnalysis(temperatureSeries);
+        double expResult = -5.0;
+        double actualResult = seriesAnalysis.findTempClosestToValue(-10);
         assertEquals(expResult, actualResult, 0.00001);
     }
     @Test(expected = IllegalArgumentException.class)
@@ -132,9 +151,9 @@ public class TemperatureSeriesAnalysisTest {
         double[] temperatureSeries = {-2.0, -270, -1.0, 0.0};
         TemperatureSeriesAnalysis seriesAnalysis 
         = new TemperatureSeriesAnalysis(temperatureSeries);
-        double expResult = -0.0;
-        double actualResult = seriesAnalysis.max();
-        assertEquals(expResult, actualResult, 0.00001);
+        double[] expResult = {-2.0, -1.0, 0.0};
+        double[] actualResult = seriesAnalysis.findTempsGreaterThen(-5);
+        assertArrayEquals(expResult, actualResult, 0.00001);
     }
     @Test(expected = IllegalArgumentException.class)
     public void testFindTempsGreaterThenFailOnEmptyList() {
@@ -160,7 +179,13 @@ public class TemperatureSeriesAnalysisTest {
         double[] actualResult = seriesAnalysis.getValues();
         assertArrayEquals(expResult, actualResult, 0.00001);
     }
-    
+    @Test(expected = InputMismatchException.class)
+    public void testAddTempsWithMismatch() {
+        double[] temperatureSeries = {87, 4};
+        TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis(temperatureSeries);
+        seriesAnalysis.addTemps(1, 2, 3, -290);
+        double[] actualResult = seriesAnalysis.getValues();
+    }
     @Test
     public void testAddTempsToEmptyList() {
         TemperatureSeriesAnalysis seriesAnalysis = new TemperatureSeriesAnalysis();
