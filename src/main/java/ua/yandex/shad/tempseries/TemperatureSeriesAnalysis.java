@@ -117,13 +117,13 @@ public class TemperatureSeriesAnalysis {
         if (length == 0) {
             throw new IllegalArgumentException();
         }
-        int count = 0;
+        int counter = 0;
         for (int i = 0; i < length; i++) {
             if (temperatureSeries[i] < temp) {
-                count++;
+                counter++;
             }
         }
-        double[] result = new double[count];
+        double[] result = new double[counter];
         int k = 0;
         for (int i = 0; i < length; i++) {
             if (temperatureSeries[i] < temp) {
