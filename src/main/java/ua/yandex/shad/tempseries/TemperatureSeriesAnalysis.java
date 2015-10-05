@@ -30,7 +30,7 @@ public class TemperatureSeriesAnalysis {
     public int getLength() {
         return this.length;
     }
-    public double average(){
+    public double average() {
         if (length == 0) {
             throw new IllegalArgumentException();
         }
@@ -42,7 +42,7 @@ public class TemperatureSeriesAnalysis {
         
         return avg;
     }    
-    public double deviation(){
+    public double deviation() {
         if (length == 0) { 
             throw new IllegalArgumentException();
         }
@@ -61,7 +61,7 @@ public class TemperatureSeriesAnalysis {
         }
         double res = temperatureSeries[0];
         for (int i = 0; i < length; i++) {
-            if(temperatureSeries[i] < res) res = temperatureSeries[i];
+            if (temperatureSeries[i] < res) res = temperatureSeries[i];
         }
         return res;
     }
@@ -71,7 +71,7 @@ public class TemperatureSeriesAnalysis {
         }
         double res = temperatureSeries[0];
         for (int i = 0; i < length; i++) {
-            if(temperatureSeries[i] > res) {
+            if (temperatureSeries[i] > res) {
                 res = temperatureSeries[i];
             }
         }
@@ -83,12 +83,12 @@ public class TemperatureSeriesAnalysis {
         }
         double res = Math.abs(temperatureSeries[0]);
         for (int i = 0; i < length; i++) {
-            if(Math.abs(temperatureSeries[i]) < res) {
+            if (Math.abs(temperatureSeries[i]) < res) {
                 res = Math.abs(temperatureSeries[i]);
             }
         }
         for (int i = 0; i < length; i++) {
-            if(temperatureSeries[i] == res) {
+            if (Math.abs(temperatureSeries[i] - res) < EPSILON) {
                 return temperatureSeries[i];
             }
         }
@@ -107,7 +107,7 @@ public class TemperatureSeriesAnalysis {
             }
         }
         for (int i = 0; i < length; i++) {
-            if(temperatureSeries[i] == res) {
+            if (Math.abs(temperatureSeries[i] - res) < EPSILON) {
                 return temperatureSeries[i];
             }
         }
@@ -126,7 +126,7 @@ public class TemperatureSeriesAnalysis {
         double[] res = new double[count];
         int k = 0;
         for (int i = 0; i < length; i++) {
-            if(temperatureSeries[i] < tempValue){
+            if (temperatureSeries[i] < tempValue) {
                 res[i] = temperatureSeries[i];
                 k++;
             }
@@ -146,7 +146,7 @@ public class TemperatureSeriesAnalysis {
         double[] res = new double[count];
         int k = 0;
         for (int i = 0; i < length; i++) {
-            if(temperatureSeries[i] > tempValue){
+            if (temperatureSeries[i] > tempValue) {
                 res[i] = temperatureSeries[i];
                 k++;
             }
@@ -167,26 +167,28 @@ public class TemperatureSeriesAnalysis {
                 throw new InputMismatchException();
             }
         }
+        
         int lengthAfterAdd = temperatureSeries.length;
         int tempsLength = temps.length;
         if (lengthAfterAdd == 0) {
             this.temperatureSeries = new double[tempsLength];
             lengthAfterAdd = tempsLength;
         }
-        while (newLength < length + tempsLength) {
-            newLength*=2;
+        
+        while (lengthAfterAdd < length + tempsLength) {
+            lengthAfterAdd*=2;
         }
         int numberOfElements = length + tempsLength;
-            
-        double[] newMas = new double[newLength];
-        for (int i=0; i < length; i++) {
-            newMas[i] = temperatureSeries[i];
+        double[] resultMas = new double[lengthAfterAdd];
+        for (int i = 0; i < length; i++) {
+            resultMas[i] = temperatureSeries[i];
         }
-        for (int i = length; i < newLength; i++) {
-            newMas[i] = temps[i-length];
+      
+        for (int i = length; i < length + temps.length; i++) {
+            resultMas[i] = temps[i-length];
         }
         
-        this.temperatureSeries = newMas;
+        this.temperatureSeries = resultMas;
         this.length = numberOfElements;
         return numberOfElements;
     }
